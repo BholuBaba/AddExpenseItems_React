@@ -2,9 +2,9 @@ import React from 'react';
 import './ExpensesFilter.css';
 
 const ExpensesFilter = (props) => {
-    const dateChangeHandler = event =>{
-      props.onChangeYear(event.target.value);
-    }
+  const dateChangeHandler = event => {
+    props.onChangeYear(event.target.value);
+  }
   return (
     <div className='expenses-filter'>
       <div className='expenses-filter__control'>

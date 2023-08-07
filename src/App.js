@@ -1,22 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
+import {useState} from 'react';
 import Expenses from './Components/Expenses/Expenses';
 import NewExpense from './Components/NewExpense/NewExpense';
 const App = () => {
-  const expense = [{ id: 1, date: new Date(2021, 4, 15), title: 'Water Tax', amount: 540 },
+  const initial_Expenses = [{ id: 1, date: new Date(2021, 4, 15), title: 'Water Tax', amount: 540 },
   { id: 2, date: new Date(2022, 5, 15), title: 'Home Tax', amount: 1005 },
   { id: 3, date: new Date(2023, 6, 15), title: 'Land Tax', amount: 660 }]
 
-  const addExpenseDataHandler = (enteredAddExpenseData) => {
-    const expenseData = {
-      ...expense,
-      expense: enteredAddExpenseData
+  const [newExpenseData,setNewExpenseData] = useState(initial_Expenses);
+  const addExpenseDataHandler = (expenseData) => {
+      setNewExpenseData((prevExpenses)=>{
+        return [expenseData, ...prevExpenses]
+      })
     };
-    console.log(expenseData);
-  }
+    //console.log(newExpenseData);  
   return (
     <div className="App">
-      <h2>Let's get started</h2>
+      <h2>React Expense App</h2>
       <p>This is the React Tutorial by Udemy Classes</p>
       <NewExpense onAddExpenseData={addExpenseDataHandler} />
       {/* <ExpenseItem date={expense[0].date} title={expense[0].title} amount={expense[0].amount}></ExpenseItem>
@@ -25,7 +26,7 @@ const App = () => {
       {/* <ExpenseItem items={expense[0]}/>
       <ExpenseItem items={expense[1]}/>
       <ExpenseItem items={expense[2]}/> */}
-      <Expenses data={expense} />
+      <Expenses items={newExpenseData} />
     </div>
   );
 }
